@@ -123,11 +123,11 @@ export default {
     }
   },
   mounted () {
-    var animationCtrl = new ScrollMagic.Controller();
-    var _d = document;
-    var _body = _d.querySelector('body');
-    var _container = _d.querySelector('#container');
-    var _games = _d.querySelectorAll('.game');
+    let animationCtrl = new ScrollMagic.Controller(),
+        _d            = document,
+        _body         = _d.querySelector('body'),
+        _container    = _d.querySelector('#container'),
+        _games        = _d.querySelectorAll('.game');
 
     _body.style.height = _container.offsetWidth + 'px';
 
@@ -146,10 +146,10 @@ export default {
       if (i % 3 === 1) el.classList.add('flex-center')
 
       // init controller
-      var controller = new ScrollMagic.Controller({vertical: false});
+      let controller = new ScrollMagic.Controller({vertical: false});
 
       // build scene
-      var scene = new ScrollMagic.Scene({
+      let scene = new ScrollMagic.Scene({
         triggerElement: el.querySelector('.game__wrapper'),
         triggerHook: 'onEnter'
       })
