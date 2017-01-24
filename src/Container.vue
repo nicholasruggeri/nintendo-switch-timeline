@@ -20,7 +20,7 @@ export default {
     return {
       months: [
         {
-          name: 'Marzo',
+          name: 'Marzo 2017',
           games : [
             {
               title: "The Legend of Zelda: Breath of the Wild",
@@ -57,7 +57,7 @@ export default {
           ]
         },
         {
-          name: 'Aprile',
+          name: 'Aprile 2017',
           games : [
             {
               title: "The Legend of Zelda: Breath of the Wild",
@@ -78,7 +78,7 @@ export default {
           ]
         },
         {
-          name: 'Maggio',
+          name: 'Maggio 2017',
           games : [
             {
               title: "The Legend of Zelda: Breath of the Wild",
@@ -99,7 +99,7 @@ export default {
           ]
         },
         {
-          name: 'Giugno',
+          name: 'Giugno 2017',
           games : [
             {
               title: "The Legend of Zelda: Breath of the Wild",
@@ -127,7 +127,7 @@ export default {
     var _d = document;
     var _body = _d.querySelector('body');
     var _container = _d.querySelector('#container');
-    var _games = document.querySelectorAll('.game');
+    var _games = _d.querySelectorAll('.game');
 
     _body.style.height = _container.offsetWidth + 'px';
 
@@ -137,20 +137,32 @@ export default {
       triggerHook: 'onLeave'
     })
     .setTween(_container, {
-        x: window.innerWidth - _container.offsetWidth*1.1
+        x: - _container.offsetWidth + window.innerWidth/2
     })
     .addTo(animationCtrl);
 
     Array.prototype.forEach.call(_games, function(el, i){
       if (i % 3 === 2) el.classList.add('flex-end')
       if (i % 3 === 1) el.classList.add('flex-center')
-    });
 
+      // init controller
+      var controller = new ScrollMagic.Controller({vertical: false});
+
+      // build scene
+      var scene = new ScrollMagic.Scene({
+        triggerElement: el.querySelector('.game__wrapper'),
+        triggerHook: 'onEnter'
+      })
+      .on('enter', function(){
+        el.querySelector('.game__wrapper').classList.add('is-visible')
+      })
+      .addTo(controller);
+    });
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 #container {
   will-change: transform;
@@ -169,24 +181,23 @@ export default {
   display: flex;
   margin-right: 80px;
   border-right: 1px solid rgba(255, 255, 255, .3);
-}
-
-.release-month:after {
-  content:"";
-  display: block;
-  width: calc(100% - 80px);
-  height: 100%;
-  background: rgba(0,0,0,0.08);
-  opacity: 0;
-  transition: opacity .5s ease-out;
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-}
-
-.release-month:hover:after {
-  opacity: 1;
+  &:after {
+    content:"";
+    display: block;
+    width: calc(100% - 80px);
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.08);
+    opacity: .5;
+    transition: opacity .5s ease-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  &:hover:after {
+    opacity: 1;
+  }
 }
 
 .release-month__wrapper {
@@ -198,10 +209,13 @@ export default {
   bottom: 2%;
   left: 0;
   width: calc(100% - 80px);
+  width: 100%;
   font-size: 14px;
   color: #fff;
   border-top: 2px solid #fff;
   padding-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 </style>

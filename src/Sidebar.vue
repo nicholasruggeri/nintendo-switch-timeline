@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 #sidebar {
   position: absolute;
@@ -43,10 +43,10 @@ export default {
   box-sizing: border-box;
   background: linear-gradient(60deg, #ce0111 0%, #d93b41 100%);
   z-index: 9;
-}
-
-svg {
-  width: 60%;
+  border-right: 1px solid rgba(255, 255, 255, .3);
+  svg {
+    width: 60%;
+  }
 }
 
 </style>

@@ -24,24 +24,37 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
   .game {
     width: 80px;
     padding-top: 50px;
     padding-bottom: 80px;
-    max-width: 90px;
     border-left: 1px solid rgba(255, 255, 255, .3);
     display: flex;
-  }
-
-  .game {
     align-items: flex-start;
-  }
-  .game.flex-center {
-    align-items: center;
-  }
-  .game.flex-end {
-    align-items: flex-end;
+    position: relative;
+    cursor: pointer;
+    &:after {
+      content:"";
+      display: block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: rgba(0,0,0,0.1);
+      opacity: 0;
+    }
+    &:hover:after {
+      opacity: .5;
+    }
+    &.flex-center {
+      align-items: center;
+    }
+    &.flex-end {
+      align-items: flex-end;
+    }
   }
 
   .game__trigger {
@@ -52,10 +65,26 @@ export default {
     margin-bottom: 20px;
     border: 2px solid #979797;
     box-shadow: 0 0 0 3px #fff, 0 0 2px 6px rgba(0,0,0,0.1), 0 0 0 7px rgba(255,255,255,0.4), 0 0 0 11px rgba(255,255,255,0.2);
+    transform: scale(0);
+    will-change: transform;
+    transition: transform 1s cubic-bezier(0.785, 0.135, 0.150, 0.860);
   }
 
   .game__wrapper {
     margin-left: -3px;
+    &.is-visible {
+      .game__trigger {
+        transform: scale(1);
+      }
+      .game__title {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+      .game__date {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+    }
   }
 
   .game__title {
@@ -65,22 +94,30 @@ export default {
     margin-left: -6px;
     width: 230%;
     max-width: 200px;
-  }
-
-  .game__title:after {
-    content: "";
-    display: block;
-    width: 30px;
-    height: 5px;
-    background: #fff;
-    margin-top: 8%;
-    margin-bottom: 8%;
+    transform: translateX(-10px);
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: all 1s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    &:after {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 5px;
+      background: #fff;
+      margin-top: 8%;
+      margin-bottom: 8%;
+    }
   }
 
   .game__date {
     color: #fff;
-    margin-left: -2.5%;
+    margin-left: -3px;
     width: 200%;
+    transform: translateX(-10px);
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: all 1s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    transition-delay: .2s;
   }
 
 </style>
