@@ -15,16 +15,13 @@
 <script>
 export default {
   name: 'game',
-  props: ['title', 'date'],
-  data () {
-    return {
-      msg: ''
-    }
-  }
+  props: ['title', 'date']
 }
 </script>
 
 <style lang="scss" scoped>
+
+  $ease: cubic-bezier(0.785, 0.135, 0.150, 0.860);
 
   .game {
     width: 80px;
@@ -64,10 +61,12 @@ export default {
     border-radius: 100%;
     margin-bottom: 20px;
     border: 2px solid #979797;
-    box-shadow: 0 0 0 3px #fff, 0 0 2px 6px rgba(0,0,0,0.1), 0 0 0 7px rgba(255,255,255,0.4), 0 0 0 11px rgba(255,255,255,0.2);
+    box-shadow: 0 0 0 3px #fff, 0 0 2px 6px rgba(0,0,0,0.1),
+                0 0 0 7px rgba(255,255,255,0.4),
+                0 0 0 11px rgba(255,255,255,0.2);
     transform: scale(0);
     will-change: transform;
-    transition: transform 1s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    transition: transform 1s $ease;
   }
 
   .game__wrapper {
@@ -97,7 +96,7 @@ export default {
     transform: translateX(-10px);
     opacity: 0;
     will-change: transform, opacity;
-    transition: all 1s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    transition: all 1s $ease;
     &:after {
       content: "";
       display: block;
@@ -116,7 +115,7 @@ export default {
     transform: translateX(-10px);
     opacity: 0;
     will-change: transform, opacity;
-    transition: all 1s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    transition: all 1s $ease;
     transition-delay: .2s;
   }
 
