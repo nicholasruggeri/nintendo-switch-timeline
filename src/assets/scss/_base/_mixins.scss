@@ -1,0 +1,71 @@
+@function strip-units($value) {
+  @return ($value / ($value * 0 + 1));
+}
+
+@function f($key) {
+  @if map-has-key($fonts, $key) {
+    @return map-get($fonts, $key);
+  }
+  @return null;
+}
+
+@function em($pxval, $base) {
+  @if not unitless($pxval) {
+    $pxval: strip-units($pxval);
+  }
+
+  @if not unitless($base) {
+    $base: strip-units($base);
+  }
+  @return ($pxval / $base) * 1em;
+}
+
+@function rem($pxval) {
+  @if not unitless($pxval) {
+    $pxval: strip-units($pxval);
+  }
+
+  $base: $base-fontsize;
+  @if not unitless($base) {
+    $base: strip-units($base);
+  }
+  @return ($pxval / $base) * 1rem;
+}
+
+
+@mixin font($a:null, $b:null, $c:null, $d:null, $e:null, $f:null) {
+  $fontFamily: null;
+  $fontSize: null;
+  $lineHeight: null;
+  $fontWeight: null;
+  $letterSpacing: null;
+  $fontSmoothing: true;
+
+  @if type-of($a) == 'string' {
+    $fontFamily: f($a);
+    @if $fontFamily == null {
+      $fontFamily: $a;
+    }
+  }
+
+  @if $fontFamily == null {
+    $fontSize: $a;
+    $lineHeight: $b;
+    $fontWeight: $c;
+    $letterSpacing: $d;
+    $fontSmoothing: $e;
+  } @else {
+    $fontSize: $b;
+    $lineHeight: $c;
+    $fontWeight: $d;
+    $letterSpacing: $e;
+    $fontSmoothing: $f;
+  }
+
+  font-family: $fontFamily;
+  @if ($fontSize) { font-size: $fontSize; } @else { font-size: 1em; }
+  @if ($lineHeight) { line-height: $lineHeight; } @else { line-height: 1em; }
+  @if ($fontWeight) { font-weight: $fontWeight; } @else { font-weight: 400; }
+  letter-spacing: $letterSpacing;
+
+}
