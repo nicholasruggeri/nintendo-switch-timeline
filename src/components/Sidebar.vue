@@ -1,4 +1,4 @@
-<template>
+<template v-once>
   <div id="sidebar">
     <svg width="59px" height="60px" viewBox="30 39 59 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
@@ -24,7 +24,7 @@ export default {
   name: 'sidebar',
   data () {
     return {
-      msg: 'ciao'
+      msg: 'This is a sidebar'
     }
   }
 }

@@ -1,16 +1,29 @@
 <template>
   <div id="app">
+    <preloader></preloader>
     <sidebar></sidebar>
-    <container></container>
+    <container v-if="isPreloaded"></container>
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      isPreloaded: false
+    }
+  },
+  mounted () {
+    window.onload = () => {
+      setTimeout(() => {
+        this.isPreloaded = true;
+        TweenMax.to(preloader, 1,{
+          opacity: 0,
+          display: 'none',
+          ease: Expo.easeInOut
+        })
+      }, 1000)
     }
   }
 }
@@ -50,6 +63,11 @@ export default {
   /**
    * Remove the margin in all browsers (opinionated).
    */
+
+  html {
+    // transform: translate3d(0, 0, 0);
+    // backface-visibility: hidden;
+  }
 
   body {
     margin: 0;

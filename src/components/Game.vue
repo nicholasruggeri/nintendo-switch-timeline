@@ -46,6 +46,11 @@ export default {
     &:hover:after {
       opacity: .5;
     }
+    &:hover {
+      .game__wrapper .game__trigger {
+        transform: scale(1.5);
+      }
+    }
     &.flex-center {
       align-items: center;
     }
@@ -116,7 +121,7 @@ export default {
     opacity: 0;
     will-change: transform, opacity;
     transition: all 1s $ease;
-    transition-delay: .2s;
+    transition-delay: 0.2s;
   }
 
 </style>
