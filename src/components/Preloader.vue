@@ -9,7 +9,29 @@
 
 <script>
 export default {
-  name: 'preloader'
+  name: 'preloader',
+  mounted () {
+    const _l = preloader.querySelector('.switch__left');
+    const _r = preloader.querySelector('.switch__right');
+    const tl = new TimelineLite({ paused: false });
+
+    tl.to(_r, .4, {
+        y: '-60%'
+    })
+    tl.to(_r, .1, {
+        y: '5%'
+    })
+    tl.to(_l, .1, {
+        y: '5%'
+    }, "-=.1")
+    tl.to(_r, .1, {
+        y: '0%'
+    })
+    tl.to(_l, .1, {
+        y: '0%'
+    }, "-=.1")
+
+  }
 }
 </script>
 
@@ -45,7 +67,7 @@ $white: #fff;
     top: 0;
     left: 0;
     border-radius: 3.1em 0 0 3.1em;
-    animation: pulse2 .7s forwards;
+    // animation: pulse2 .7s forwards;
     &:before {
       content: "";
       display: block;
@@ -75,7 +97,7 @@ $white: #fff;
     right: 0;
     border-radius:  0 3.1em 3.1em 0;
     transform: translateY(-50%);
-    animation: pulse .7s forwards;
+    // animation: pulse .7s forwards;
     &:after {
       content: "";
       display: block;
