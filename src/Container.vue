@@ -144,13 +144,30 @@ export default {
     let _d         = document,
         _scroller  = _d.querySelector('.scroller'),
         _container = _d.querySelector('#container'),
-        _games     = _d.querySelectorAll('.game');
+        _games     = _d.querySelectorAll('.game'),
+        ticking = false;
 
     _scroller.style.height = _container.offsetWidth + 'px';
 
-    window.onscroll = (e) => {
-      var X = (_container.offsetWidth - window.innerWidth) * (document.body.scrollTop / (container.offsetWidth - window.innerHeight));
+    let update = () => {
+      let X = (_container.offsetWidth - window.innerWidth) * (document.body.scrollTop / (container.offsetWidth - window.innerHeight));
       container.style.transform = "translateX("+ -X +"px)"
+      ticking = false;
+    }
+
+    let requestTick = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    let onScroll = function() {
+      requestTick();
+    }
+
+    window.onscroll = () => {
+      onScroll()
     }
 
     Array.prototype.forEach.call(_games, function(el, i){
@@ -169,12 +186,15 @@ export default {
   flex-grow: 1;
   padding-left: 80px;
   position: absolute;
+  z-index: 1;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: row;
   height: 100%;
-  background: #191919;
+  transition: transform .1s ease-out;
 }
 
 .release-bg {
@@ -187,6 +207,7 @@ export default {
 
 .tba-bg {
   background: linear-gradient(60deg, #191919 0%, #383636 100%);
+  background: #191919;
   display: flex;
   padding-left: 80px;
   padding-right: 80px;
@@ -215,15 +236,12 @@ export default {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.08);
-    opacity: .5;
+    opacity: 1;
     transition: opacity .5s ease-out;
     position: absolute;
     top: 0;
     left: 0;
     pointer-events: none;
-  }
-  &:hover:after {
-    opacity: 1;
   }
 }
 
