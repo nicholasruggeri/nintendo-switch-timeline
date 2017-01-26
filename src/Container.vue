@@ -125,14 +125,14 @@ export default {
   mounted () {
     let animationCtrl = new ScrollMagic.Controller(),
         _d            = document,
-        _body         = _d.querySelector('body'),
+        _scroller     = _d.querySelector('.scroller'),
         _container    = _d.querySelector('#container'),
         _games        = _d.querySelectorAll('.game');
 
-    _body.style.height = _container.offsetWidth + 'px';
+    _scroller.style.height = _container.offsetWidth + 'px';
 
     new ScrollMagic.Scene({
-      triggerElement: _body,
+      triggerElement: _scroller,
       duration: _container.offsetWidth,
       triggerHook: 'onLeave'
     })
