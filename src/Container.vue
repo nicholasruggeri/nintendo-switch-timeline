@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-
     <div class="release-bg">
       <div class="release-container">
         <div class="release-month" v-for="month in months">
@@ -25,13 +24,10 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'container',
   data () {
@@ -150,8 +146,8 @@ export default {
     _scroller.style.height = _container.offsetWidth + 'px';
 
     let update = () => {
-      let X = (_container.offsetWidth - window.innerWidth) * (document.body.scrollTop / (container.offsetWidth - window.innerHeight));
-      container.style.transform = "translateX("+ -X +"px)"
+      let X = (_container.offsetWidth - window.innerWidth) * (_d.body.scrollTop / (container.offsetWidth - window.innerHeight));
+      TweenLite.set(container, {x: -X})
       ticking = false;
     }
 
@@ -197,33 +193,28 @@ export default {
   transition: transform .1s ease-out;
 }
 
-.release-bg {
-  background: linear-gradient(60deg, rgba(230,0,19,1) 0%, rgba(252,125,123,1) 100%);
-  // background: rgba(230,0,19,1);
+.release-bg, .tba-bg {
   display: flex;
   padding-left: 80px;
   padding-right: 80px;
+}
+
+.release-bg {
+  background: linear-gradient(60deg, rgba(230,0,19,1) 0%, rgba(252,125,123,1) 100%);
+  // background: rgba(230,0,19,1);
 }
 
 .tba-bg {
   background: linear-gradient(60deg, #191919 0%, #383636 100%);
-  background: #191919;
-  display: flex;
-  padding-left: 80px;
-  padding-right: 80px;
+  // background: #191919;
 }
 
-.release-container {
+.release-container, .tba-container {
   position: relative;
   display: flex;
   border-right: 1px solid rgba(255, 255, 255, .3);
 }
 
-.tba-container {
-  position: relative;
-  display: flex;
-  border-right: 1px solid rgba(255, 255, 255, .3);
-}
 .release-month, .release-tba {
   position: relative;
   display: flex;

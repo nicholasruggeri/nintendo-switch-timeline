@@ -18,7 +18,7 @@ export default {
     window.onload = () => {
       setTimeout(() => {
         this.isPreloaded = true;
-        TweenMax.to(preloader, 1,{
+        TweenLite.to(preloader, 1,{
           opacity: 0,
           display: 'none',
           ease: Expo.easeInOut
