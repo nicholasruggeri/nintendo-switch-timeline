@@ -36,6 +36,5 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(60deg, rgba(230,0,19,1) 0%, rgba(252,125,123,1) 100%);
   }
 </style>

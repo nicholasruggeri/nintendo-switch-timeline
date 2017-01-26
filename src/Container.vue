@@ -1,23 +1,28 @@
 <template>
   <div id="container">
 
-    <div class="release-month" v-for="month in months">
-        <div class="release-month__name">
-          {{ month.name }}
+    <div class="release-bg">
+      <div class="release-container">
+        <div class="release-month" v-for="month in months">
+            <div class="release-month__name">
+              {{ month.name }}
+            </div>
+            <div class="release-month__wrapper">
+              <game v-for="game in month.games" :title="game.title" :date="game.date"></game>
+            </div>
         </div>
-        <div class="release-month__wrapper">
-          <game v-for="game in month.games" :title="game.title" :date="game.date"></game>
-        </div>
-    </div>
-
-    <div class="tba-container">
-      <div class="release-tba__name">
-        release date to be announced
       </div>
-      <div class="release-tba" v-for="month in months">
-          <div class="release-tba__wrapper">
-            <game v-for="game in month.games" :title="game.title"></game>
-          </div>
+    </div>
+    <div class="tba-bg">
+      <div class="tba-container">
+        <div class="release-tba__name">
+          release date to be announced
+        </div>
+        <div class="release-tba" v-for="month in months">
+            <div class="release-tba__wrapper">
+              <game v-for="game in month.games" :title="game.title"></game>
+            </div>
+        </div>
       </div>
     </div>
 
@@ -162,20 +167,41 @@ export default {
 #container {
   will-change: transform;
   flex-grow: 1;
-  padding-left: 160px;
+  padding-left: 80px;
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: row;
   height: 100%;
+  background: #191919;
+}
+
+.release-bg {
+  background: linear-gradient(60deg, rgba(230,0,19,1) 0%, rgba(252,125,123,1) 100%);
+  // background: rgba(230,0,19,1);
+  display: flex;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.tba-bg {
+  background: linear-gradient(60deg, #191919 0%, #383636 100%);
+  display: flex;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.release-container {
+  position: relative;
+  display: flex;
+  border-right: 1px solid rgba(255, 255, 255, .3);
 }
 
 .tba-container {
   position: relative;
   display: flex;
-  background: linear-gradient(60deg, #191919 0%, #383636 100%);
-  padding-left: 80px;
+  border-right: 1px solid rgba(255, 255, 255, .3);
 }
 .release-month, .release-tba {
   position: relative;
@@ -221,7 +247,7 @@ export default {
 }
 
 .release-tba__name {
-  left: 80px;
+  width: calc(100% - 80px);
 }
 
 </style>
