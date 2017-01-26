@@ -5,7 +5,7 @@
       <div class="game__title">
         {{ title }}
       </div>
-      <div class="game__date">
+      <div class="game__date" v-if="date">
         {{ date }}
       </div>
     </div>
@@ -49,6 +49,7 @@ export default {
     &:hover {
       .game__wrapper .game__trigger {
         transform: scale(1.5);
+        transition-delay: 0s;
       }
     }
     &.flex-center {
@@ -56,6 +57,19 @@ export default {
     }
     &.flex-end {
       align-items: flex-end;
+    }
+    @for $i from 1 to 100 {
+      &:nth-child(#{$i}) {
+        .game__trigger {
+          transition-delay: $i * 0.1s;
+        }
+        .game__title {
+          transition-delay: $i * 0.1s;
+        }
+        .game__date {
+          transition-delay: $i * 0.25s;
+        }
+      }
     }
   }
 
@@ -121,7 +135,6 @@ export default {
     opacity: 0;
     will-change: transform, opacity;
     transition: all 1s $ease;
-    transition-delay: 0.2s;
   }
 
 </style>

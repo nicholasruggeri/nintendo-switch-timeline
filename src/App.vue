@@ -29,14 +29,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
   #app {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
     background: linear-gradient(60deg, rgba(230,0,19,1) 0%, rgba(252,125,123,1) 100%);
   }
 </style>

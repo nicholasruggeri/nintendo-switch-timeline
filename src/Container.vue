@@ -9,6 +9,19 @@
           <game v-for="game in month.games" :title="game.title" :date="game.date"></game>
         </div>
     </div>
+
+    <div class="tba-container">
+      <div class="release-tba__name">
+        release date to be announced
+      </div>
+      <div class="release-tba" v-for="month in months">
+          <div class="release-tba__wrapper">
+            <game v-for="game in month.games" :title="game.title"></game>
+          </div>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -123,40 +136,22 @@ export default {
     }
   },
   mounted () {
-    let animationCtrl = new ScrollMagic.Controller(),
-        _d            = document,
-        _scroller     = _d.querySelector('.scroller'),
-        _container    = _d.querySelector('#container'),
-        _games        = _d.querySelectorAll('.game');
+    let _d         = document,
+        _scroller  = _d.querySelector('.scroller'),
+        _container = _d.querySelector('#container'),
+        _games     = _d.querySelectorAll('.game');
 
     _scroller.style.height = _container.offsetWidth + 'px';
 
-    new ScrollMagic.Scene({
-      triggerElement: _scroller,
-      duration: _container.offsetWidth,
-      triggerHook: 'onLeave'
-    })
-    .setTween(_container, {
-        x: - _container.offsetWidth + window.innerWidth/2
-    })
-    .addTo(animationCtrl);
+    window.onscroll = (e) => {
+      var X = (_container.offsetWidth - window.innerWidth) * (document.body.scrollTop / (container.offsetWidth - window.innerHeight));
+      container.style.transform = "translateX("+ -X +"px)"
+    }
 
     Array.prototype.forEach.call(_games, function(el, i){
       if (i % 3 === 2) el.classList.add('flex-end')
       if (i % 3 === 1) el.classList.add('flex-center')
-
-      // init controller
-      let controller = new ScrollMagic.Controller({vertical: false});
-
-      // build scene
-      let scene = new ScrollMagic.Scene({
-        triggerElement: el.querySelector('.game__wrapper'),
-        triggerHook: 'onEnter'
-      })
-      .on('enter', function(){
-        el.querySelector('.game__wrapper').classList.add('is-visible')
-      })
-      .addTo(controller);
+      el.querySelector('.game__wrapper').classList.add('is-visible')
     });
   }
 }
@@ -176,7 +171,13 @@ export default {
   height: 100%;
 }
 
-.release-month {
+.tba-container {
+  position: relative;
+  display: flex;
+  background: linear-gradient(60deg, #191919 0%, #383636 100%);
+  padding-left: 80px;
+}
+.release-month, .release-tba {
   position: relative;
   display: flex;
   margin-right: 80px;
@@ -200,11 +201,11 @@ export default {
   }
 }
 
-.release-month__wrapper {
+.release-month__wrapper, .release-tba__wrapper {
   display: flex;
 }
 
-.release-month__name {
+.release-month__name, .release-tba__name {
   position: absolute;
   bottom: 2%;
   left: 0;
@@ -214,8 +215,13 @@ export default {
   color: #fff;
   border-top: 2px solid #fff;
   padding-top: 10px;
+  padding-left: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.release-tba__name {
+  left: 80px;
 }
 
 </style>
