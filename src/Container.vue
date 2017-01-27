@@ -190,7 +190,7 @@ export default {
   display: flex;
   flex-direction: row;
   height: 100%;
-  transition: transform .1s ease-out;
+  // transition: transform .1s ease-out;
 }
 
 .release-bg, .tba-bg {
