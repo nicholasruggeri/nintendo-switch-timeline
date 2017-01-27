@@ -190,12 +190,13 @@ export default {
   display: flex;
   flex-direction: row;
   height: 100%;
+  display: table;
 }
 
 .release-bg, .tba-bg {
-  display: flex;
   padding-left: 80px;
   padding-right: 80px;
+  display: table-cell;
 }
 
 .release-bg {
@@ -209,12 +210,19 @@ export default {
 .release-container, .tba-container {
   position: relative;
   display: flex;
+  height: 100%;
   border-right: 1px solid rgba(255, 255, 255, .3);
+  // display: table;
 }
 
 .release-month, .release-tba {
+  // display: table-cell;
+  // vertical-align: top;
+  display: inline-block;
+  float: left;
+  height: 100%;
   position: relative;
-  display: flex;
+  // display: flex;
   margin-right: 80px;
   border-right: 1px solid rgba(255, 255, 255, .3);
   &:after {
@@ -235,6 +243,7 @@ export default {
 
 .release-month__wrapper, .release-tba__wrapper {
   display: flex;
+  height: 100%;
 }
 
 .release-month__name, .release-tba__name {

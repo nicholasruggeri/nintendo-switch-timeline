@@ -32,6 +32,7 @@ export default {
     align-items: flex-start;
     position: relative;
     cursor: pointer;
+    height: 100%;
     &:after {
       content:"";
       display: block;
