@@ -190,7 +190,6 @@ export default {
   display: flex;
   flex-direction: row;
   height: 100%;
-  // transition: transform .1s ease-out;
 }
 
 .release-bg, .tba-bg {
@@ -200,13 +199,11 @@ export default {
 }
 
 .release-bg {
-  background: linear-gradient(60deg, rgba(230,0,19,1) 0%, rgba(252,125,123,1) 100%);
-  // background: rgba(230,0,19,1);
+  background: linear-gradient(60deg, #ce0111 0%, rgba(252,125,123,1) 100%);
 }
 
 .tba-bg {
   background: linear-gradient(60deg, #191919 0%, #383636 100%);
-  // background: #191919;
 }
 
 .release-container, .tba-container {

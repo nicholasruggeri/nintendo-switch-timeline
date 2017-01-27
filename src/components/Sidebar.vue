@@ -16,16 +16,38 @@
             <path d="M9.22006111,17.9581521 C9.21896852,14.8727779 11.4999377,12.5953055 14.5988944,12.5880663 C17.7160611,12.580827 20.0258019,14.8633669 20.0258019,17.9512748 C20.0258019,21.0449742 17.7248019,23.3275141 14.6061784,23.3271521 C11.515234,23.3267902 9.2211537,21.0402687 9.22006111,17.9581521" id="Fill-6" fill="#FFFFFF"></path>
         </g>
     </svg>
+
+    <div class="filters">
+      <div class="filters__button  is-active">
+        JP
+      </div>
+      <div class="filters__button">
+        NA
+      </div>
+      <div class="filters__button">
+        PAL
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'sidebar',
-  data () {
-    return {
-      msg: 'This is a sidebar'
-    }
+  mounted () {
+    let _filters = document.querySelectorAll('.filters__button');
+    TweenLite.to(_filters[0], .3, {
+      x: 0,
+      delay: 2
+    })
+    TweenLite.to(_filters[1], .3, {
+      x: 0,
+      delay: 2.2
+    })
+    TweenLite.to(_filters[2], .3, {
+      x: 0,
+      delay: 2.4
+    })
   }
 }
 </script>
@@ -46,6 +68,40 @@ export default {
   border-right: 1px solid rgba(255, 255, 255, .3);
   svg {
     width: 60%;
+  }
+}
+
+.filters {
+  position: absolute;
+  bottom: 3%;
+  left: 0;
+  width: 100%;
+  &__button {
+    opacity: .7;
+    color: #fff;
+    font-size: 16px;
+    padding: 25% 0;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transform: translateX(-100%);
+    &:hover {
+      opacity: 1;
+    }
+    &.is-active {
+      opacity: 1;
+      pointer-events: none;
+      &:after {
+        content:"";
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 5px;
+        background: #fff;
+      }
+    }
   }
 }
 
