@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <info></info>
     <preloader></preloader>
     <sidebar></sidebar>
     <container v-if="isPreloaded"></container>
