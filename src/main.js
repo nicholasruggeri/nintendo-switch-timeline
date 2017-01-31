@@ -10,7 +10,13 @@ Vue.component('container', Container)
 Vue.component('game', Game)
 Vue.component('preloader', Preloader)
 
+
 const vm = new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
+  mounted() {
+    this.$on('change-market-up', (data) => {
+      this.$emit('change-market', data)
+    });
+  },
 })

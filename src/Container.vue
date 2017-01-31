@@ -32,145 +32,76 @@ export default {
   name: 'container',
   data () {
     return {
-      months: [
-        {
-          name: 'Marzo 2017',
-          games : [
-            {
-              title: "The Legend of Zelda: Breath of the Wild",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Skylanders: Imaginators",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Super Bomberman R",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Showel Knight",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "The Legend of Zelda: Breath of the Wild",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Skylanders: Imaginators",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Super Bomberman R",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Showel Knight",
-              date: "3 Marzo 2017"
-            }
-          ]
-        },
-        {
-          name: 'Aprile 2017',
-          games : [
-            {
-              title: "The Legend of Zelda: Breath of the Wild",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Skylanders: Imaginators",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Super Bomberman R",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Showel Knight",
-              date: "3 Marzo 2017"
-            }
-          ]
-        },
-        {
-          name: 'Maggio 2017',
-          games : [
-            {
-              title: "The Legend of Zelda: Breath of the Wild",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Skylanders: Imaginators",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Super Bomberman R",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Showel Knight",
-              date: "3 Marzo 2017"
-            }
-          ]
-        },
-        {
-          name: 'Giugno 2017',
-          games : [
-            {
-              title: "The Legend of Zelda: Breath of the Wild",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Skylanders: Imaginators",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Super Bomberman R",
-              date: "3 Marzo 2017"
-            },
-            {
-              title: "Showel Knight",
-              date: "3 Marzo 2017"
-            }
-          ]
-        },
-      ]
+      months: releases.jp
     }
   },
-  mounted () {
-    let _d         = document,
+  methods: {
+    setHeightScroller: function() {
+      let _d = document,
+          _container = _d.querySelector('#container'),
+          _scroller  = _d.querySelector('.scroller');
+      _scroller.style.height = _container.offsetWidth + 'px';
+    },
+    setGameAlignment: function() {
+      let _d       = document,
+        _games     = _d.querySelectorAll('.game');
+
+      Array.prototype.forEach.call(_games, function(el, i){
+        if (i % 3 === 2) el.classList.add('flex-end')
+        if (i % 3 === 1) el.classList.add('flex-center')
+        el.querySelector('.game__wrapper').classList.add('is-visible')
+      });
+    },
+    renderBlock: function() {
+      let _d       = document,
         _scroller  = _d.querySelector('.scroller'),
         _container = _d.querySelector('#container'),
         _games     = _d.querySelectorAll('.game'),
+        ticking    = false;
+
+      let update = () => {
+        let X = (_container.offsetWidth - window.innerWidth) * (_d.body.scrollTop / (container.offsetWidth - window.innerHeight));
+        TweenLite.set(container, {x: -X})
         ticking = false;
-
-    _scroller.style.height = _container.offsetWidth + 'px';
-
-    let update = () => {
-      let X = (_container.offsetWidth - window.innerWidth) * (_d.body.scrollTop / (container.offsetWidth - window.innerHeight));
-      TweenLite.set(container, {x: -X})
-      ticking = false;
-    }
-
-    let requestTick = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
       }
-    }
 
-    let onScroll = function() {
-      requestTick();
-    }
+      let requestTick = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
 
-    window.onscroll = () => {
-      onScroll()
-    }
+      let onScroll = function() {
+        requestTick();
+      }
 
-    Array.prototype.forEach.call(_games, function(el, i){
-      if (i % 3 === 2) el.classList.add('flex-end')
-      if (i % 3 === 1) el.classList.add('flex-center')
-      el.querySelector('.game__wrapper').classList.add('is-visible')
-    });
+      window.onscroll = () => {
+        onScroll()
+      }
+
+      this.setGameAlignment()
+    }
+  },
+  watch: {
+    months: function (val, oldVal) {
+      console.log('new: %s, old: %s', val, oldVal)
+    },
+  },
+  mounted () {
+    let that = this;
+    this.renderBlock()
+    that.setHeightScroller()
+    that.setGameAlignment()
+    that.$root.$on('change-market', function(data){
+      console.log(data.market)
+      that.$data.months = releases[data.market]
+      that.renderBlock()
+      setTimeout(function(){
+        that.setHeightScroller()
+        that.setGameAlignment()
+      }, 100)
+    })
   }
 }
 </script>

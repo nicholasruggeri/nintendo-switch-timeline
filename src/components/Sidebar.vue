@@ -18,13 +18,13 @@
     </svg>
 
     <div class="filters">
-      <div class="filters__button  is-active">
+      <div class="filters__button  is-active" v-on:click="changeMarket('jp')">
         JP
       </div>
-      <div class="filters__button">
+      <div class="filters__button" v-on:click="changeMarket('na')">
         NA
       </div>
-      <div class="filters__button">
+      <div class="filters__button" v-on:click="changeMarket('eu')">
         PAL
       </div>
     </div>
@@ -48,6 +48,14 @@ export default {
       x: 0,
       delay: 2.4
     })
+  },
+  methods: {
+    changeMarket: function (market) {
+      console.log('asd', market)
+      this.$root.$emit('change-market-up', {
+        market: market
+      })
+    }
   }
 }
 </script>
@@ -90,7 +98,6 @@ export default {
     }
     &.is-active {
       opacity: 1;
-      pointer-events: none;
       &:after {
         content:"";
         display: block;
