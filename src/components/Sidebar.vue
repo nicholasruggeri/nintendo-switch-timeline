@@ -18,13 +18,13 @@
     </svg>
 
     <div class="filters">
-      <div class="filters__button  is-active" v-on:click="changeMarket('jp')">
+      <div class="filters__button"  v-bind:class="[currentMarket == 'jp' ? 'active' : '']"  v-on:click="changeMarket('jp')">
         JP
       </div>
-      <div class="filters__button" v-on:click="changeMarket('na')">
+      <div class="filters__button"  v-bind:class="[currentMarket == 'na' ? 'active' : '']"  v-on:click="changeMarket('na')">
         NA
       </div>
-      <div class="filters__button" v-on:click="changeMarket('eu')">
+      <div class="filters__button"  v-bind:class="[currentMarket == 'eu' ? 'active' : '']"  v-on:click="changeMarket('eu')">
         PAL
       </div>
     </div>
@@ -34,26 +34,37 @@
 <script>
 export default {
   name: 'sidebar',
+  data () {
+    return {
+      currentMarket: 'jp'
+    }
+  },
   mounted () {
-    let _filters = document.querySelectorAll('.filters__button');
-    TweenLite.to(_filters[0], .3, {
-      x: 0,
-      delay: 2
-    })
-    TweenLite.to(_filters[1], .3, {
-      x: 0,
-      delay: 2.2
-    })
-    TweenLite.to(_filters[2], .3, {
-      x: 0,
-      delay: 2.4
+    let that = this;
+    this.animate()
+    that.$root.$on('change-market', function(data){
+      that.$data.currentMarket = data.market
     })
   },
   methods: {
     changeMarket: function (market) {
-      console.log('asd', market)
       this.$root.$emit('change-market-up', {
         market: market
+      })
+    },
+    animate: function() {
+      let _filters = document.querySelectorAll('.filters__button');
+      TweenLite.to(_filters[0], .3, {
+        x: 0,
+        delay: 2
+      })
+      TweenLite.to(_filters[1], .3, {
+        x: 0,
+        delay: 2.2
+      })
+      TweenLite.to(_filters[2], .3, {
+        x: 0,
+        delay: 2.4
       })
     }
   }
@@ -96,7 +107,7 @@ export default {
     &:hover {
       opacity: 1;
     }
-    &.is-active {
+    &.active {
       opacity: 1;
       &:after {
         content:"";
