@@ -54,9 +54,7 @@ export default {
     },
     renderBlock: function() {
       let _d       = document,
-        _scroller  = _d.querySelector('.scroller'),
         _container = _d.querySelector('#container'),
-        _games     = _d.querySelectorAll('.game'),
         ticking    = false;
 
       let update = () => {
@@ -80,7 +78,6 @@ export default {
         onScroll()
       }
 
-      this.setGameAlignment()
     }
   },
   watch: {
@@ -94,13 +91,12 @@ export default {
     that.setHeightScroller()
     that.setGameAlignment()
     that.$root.$on('change-market', function(data){
-      console.log(data.market)
       that.$data.months = releases[data.market]
       that.renderBlock()
       setTimeout(function(){
         that.setHeightScroller()
         that.setGameAlignment()
-      }, 100)
+      }, 0)
     })
   }
 }
