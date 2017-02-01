@@ -6,11 +6,22 @@
     </h1>
 
     <p class="m-info__details">
+      <span>This</span>
+      <span>site</span>
+      <span>is</span>
+      <span>an</span>
+      <span>opensource</span>
+      <span>project</span>
+      <span>built</span>
+      <span>with</span>
+      <span>Vue.js</span>
+      <span>and</span>
+      <span>Laravel</span>
+    </p>
+
+    <p class="m-info__details">
       <span>Developed</span> <span>by</span> <span><a href="#">Nic</a></span> <span>and</span> <span><a href="#">Eric</a></span><br>
       <span>Designed</span> <span>by</span> <span><a href="#">Marco</a></span><br><br>
-
-      <span>Built</span> <span>with</span> <span><a href="#">Vue.js</a></span> <span>and</span> <span><a href="#">Laravel</a></span><br>
-      <span>Data</span> <span>"stolen"</span> <span>from</span> <span><a href="#">Wikipedia</a></span>
     </p>
   </div>
 </template>

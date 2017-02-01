@@ -12,6 +12,22 @@ Vue.component('game', Game)
 Vue.component('preloader', Preloader)
 Vue.component('info', Info)
 
+window.ISTOUCH = {
+  init: function(){
+    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+      document.querySelector('body').classList.add('is-touch')
+    }
+  },
+  check: function(){
+    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+ISTOUCH.init()
 
 const vm = new Vue({
   el: '#app',

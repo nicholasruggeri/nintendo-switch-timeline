@@ -74,9 +74,12 @@ export default {
         requestTick();
       }
 
-      window.onscroll = () => {
-        onScroll()
+      if (!ISTOUCH.check()) {
+        window.onscroll = () => {
+          onScroll()
+        }
       }
+
 
     }
   },
@@ -88,13 +91,17 @@ export default {
   mounted () {
     let that = this;
     this.renderBlock()
-    that.setHeightScroller()
+    if (!ISTOUCH.check()) {
+      that.setHeightScroller()
+    }
     that.setGameAlignment()
     that.$root.$on('change-market', function(data){
       that.$data.months = releases[data.market]
       that.renderBlock()
       setTimeout(function(){
-        that.setHeightScroller()
+        if (!ISTOUCH.check()) {
+          that.setHeightScroller()
+        }
         that.setGameAlignment()
       }, 0)
     })
