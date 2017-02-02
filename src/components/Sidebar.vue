@@ -27,7 +27,7 @@
         <div class="filters__button"  v-bind:class="[currentMarket == 'na' ? 'active' : '']"  v-on:click="changeMarket('na')">
           NA
         </div>
-        <div class="filters__button"  v-bind:class="[currentMarket == 'eu' ? 'active' : '']"  v-on:click="changeMarket('eu')">
+        <div class="filters__button"  v-bind:class="[currentMarket == 'pal' ? 'active' : '']"  v-on:click="changeMarket('pal')">
           PAL
         </div>
       </div>

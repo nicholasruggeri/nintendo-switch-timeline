@@ -2,13 +2,15 @@
   <div id="container">
     <div class="release-bg">
       <div class="release-container">
-        <div class="release-month" v-for="month in months">
+        <div class="release-month" v-for="month in months" v-if="month.name !== 'tba'">
+          <template>
             <div class="release-month__name">
               {{ month.name }}
             </div>
             <div class="release-month__wrapper">
               <game v-for="game in month.games" :title="game.title" :date="game.date"></game>
             </div>
+          </template>
         </div>
       </div>
     </div>
@@ -17,10 +19,12 @@
         <div class="release-tba__name">
           release date to be announced
         </div>
-        <div class="release-tba" v-for="month in months">
+        <div class="release-tba" v-for="month in months" v-if="month.name == 'tba'">
+          <template>
             <div class="release-tba__wrapper">
               <game v-for="game in month.games" :title="game.title"></game>
             </div>
+          </template>
         </div>
       </div>
     </div>
@@ -42,11 +46,16 @@ export default {
           _scroller  = _d.querySelector('.scroller');
       _scroller.style.height = _container.offsetWidth + 'px';
     },
+    resetGameAlignment: function(el) {
+      el.classList.remove('flex-end')
+      el.classList.remove('flex-center')
+    },
     setGameAlignment: function() {
       let _d       = document,
-        _games     = _d.querySelectorAll('.game');
-
+          _that    = this,
+          _games   = _d.querySelectorAll('.game');
       Array.prototype.forEach.call(_games, function(el, i){
+        _that.resetGameAlignment(el)
         if (i % 3 === 2) el.classList.add('flex-end')
         if (i % 3 === 1) el.classList.add('flex-center')
         el.querySelector('.game__wrapper').classList.add('is-visible')
@@ -193,6 +202,7 @@ export default {
   padding-left: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .release-tba__name {

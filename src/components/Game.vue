@@ -1,5 +1,5 @@
 <template>
-  <div class="game">
+  <div class="game" v-if="date !== 'tba'">
     <div class="game__wrapper">
       <div class="game__trigger"></div>
       <div class="game__title">
