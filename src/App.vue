@@ -32,6 +32,7 @@ export default {
 
 <style lang="scss" scoped>
   #app {
+    background: #1e1d1d;
     position: fixed;
     top: 0;
     left: 0;
