@@ -9,5 +9,4 @@ Homestead.yaml
 .env
 
 /public/css
-/public/js
 composer.phar
